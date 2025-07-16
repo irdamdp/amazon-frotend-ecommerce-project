@@ -41,7 +41,6 @@ const Authforget = () => {
                 type="email"
                 placeholder="Enter your registered email"
                 value={email}
-                type="email"
                 id="email"
                 onChange={(e) => setEmail(e.target.value)}
                 required
