@@ -9,7 +9,7 @@ function Results() {
   const [isloader, setIsloader] = useState(false);
 
   const { categoryName } = useParams();
-  const BASE_URL = import.meta.env.DEV ? "https://fakestoreapi.com" : "/api";
+  const BASE_URL = import.meta.env.PROD ? "https://fakestoreapi.com" : "/api";
   useEffect(() => {
     setIsloader(true);
     axios
