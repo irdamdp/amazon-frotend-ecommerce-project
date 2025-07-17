@@ -8,13 +8,12 @@ function ProductDetail() {
   const { ProductsId } = useParams();
   const [detail, setDetail] = useState({});
   const [isloading, setIsloading] = useState(false);
+  const BASE_URL = import.meta.env.PROD ? "https://fakestoreapi.com" : "/api";
 
-
-  
   useEffect(() => {
     setIsloading(true);
     axios
-      .get(`/api/products/${ProductsId}`)
+      .get(`${BASE_URL}/products/${ProductsId}`)
       .then((res) => {
         setDetail(res.data);
         setIsloading(false);
@@ -23,14 +22,19 @@ function ProductDetail() {
         console.log(err);
         setIsloading(false);
       });
-  }, []); 
+  }, []);
 
   return (
     <>
       {isloading ? (
         <Loader />
       ) : detail && Object.keys(detail).length > 0 ? (
-        <Products_card product={detail} flex={true} renderdi={true} remover={true} />
+        <Products_card
+          product={detail}
+          flex={true}
+          renderdi={true}
+          remover={true}
+        />
       ) : (
         ""
       )}
