@@ -7,12 +7,13 @@ import Loader from "../loader/Loader.jsx";
 function Products() {
   const [products, setProducts] = useState([]);
   const [isloader, setIsloader] = useState(false);
+  const BASE_URL = import.meta.env.PROD ? "https://fakestoreapi.com" : "/api";
 
   useEffect(() => {
     setIsloader(true);
 
     axios
-      .get("api/products")
+      .get(`${BASE_URL}/products`)
       .then((res) => {
         setProducts(res.data);
         setIsloader(false);
