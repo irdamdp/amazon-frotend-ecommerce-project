@@ -9,11 +9,11 @@ function Results() {
   const [isloader, setIsloader] = useState(false);
 
   const { categoryName } = useParams();
-
+  const BASE_URL = import.meta.env.DEV ? "https://fakestoreapi.com" : "/api";
   useEffect(() => {
     setIsloader(true);
     axios
-      .get(`/api/products/category/${categoryName}`)
+      .get(`${BASE_URL}/products/category/${categoryName}`)
       .then((res) => {
         // console.log(res.data);
         setIsloader(false);
@@ -27,9 +27,7 @@ function Results() {
 
   return (
     <>
-
       <section>
-
         <h1 style={{ padding: "30px" }}>Results</h1>
         <p style={{ padding: "30px" }}>Category / {categoryName} </p>
 
@@ -38,7 +36,11 @@ function Results() {
         ) : (
           <div className={classes.products_container}>
             {results?.map((productt) => (
-              <Products_card product={productt} key={productt.id} remover={true} />
+              <Products_card
+                product={productt}
+                key={productt.id}
+                remover={true}
+              />
             ))}
           </div>
         )}
