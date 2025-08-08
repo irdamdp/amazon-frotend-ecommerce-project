@@ -9,3 +9,16 @@
 .products_container section {
   margin: 0 auto;
 }
+
+@media (max-width: 590px) {
+  .products_container {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 20px;
+  }
+}
+@media (max-width: 530px) {
+  .products_container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+}

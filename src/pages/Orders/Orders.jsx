@@ -29,6 +29,7 @@ function Orders() {
       setOrders([]);
     }
   }, []);
+
   return (
     <>
       <section className={classes.container}>

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../components/loader/Loader";
 import Products_card from "../../components/products/Products_card";
+
 function ProductDetail() {
   const { ProductsId } = useParams();
   const [detail, setDetail] = useState({});

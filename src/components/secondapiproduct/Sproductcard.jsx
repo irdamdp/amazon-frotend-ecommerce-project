@@ -44,7 +44,10 @@ function Sproductcard({ categorized, flex, renderdi, remover, alter }) {
           {renderdi && <div style={{ maxWidth: "750px" }}> {description}</div>}
 
           {!alter && (
-            <div style={{ fontWeight: "bold", paddingTop: "5px" }}>
+            <div
+              style={{ fontWeight: "bold", paddingTop: "5px" }}
+              className={classes.model_info}
+            >
               Model:- {model}, {brand}
             </div>
           )}

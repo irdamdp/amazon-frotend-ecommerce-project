@@ -210,6 +210,7 @@
     display: flex;
     flex-direction: column !important;
     height: auto;
+    gap: 1px;
   }
   .lower_header ul li:not(:first-child) {
     display: none;
@@ -229,5 +230,11 @@
   }
   .header_container {
     padding-bottom: 0.5px;
+  }
+  .logo_link {
+    padding: 10px;
+  }
+  .logo_link img {
+    width: 120px;
   }
 }

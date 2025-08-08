@@ -64,7 +64,6 @@ function Auth() {
           navigate(navStateData?.state?.redirect || "/");
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
           setError(errorMessage);
           setLoading({ ...loading, signup: false });
@@ -157,13 +156,6 @@ function Auth() {
             {error && <small className={classes.error}>{error}</small>}
           </p>
         </div>
-
-        {/* <div className={classes.signinimage}>
-          <img
-            src="https://images.unsplash.com/photo-1593642633279-26a8b0f2b3c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
-            alt="Signup"
-          />
-        </div> */}
       </section>
     </>
   );

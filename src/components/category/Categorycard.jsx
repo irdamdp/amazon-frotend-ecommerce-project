@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import classes from "./category.module.css";
 
 function Categorycard({ data }) {
-  
   return (
     <>
       <div className={classes.category_card}>

@@ -47,7 +47,9 @@ function Products_card({ product, flex, renderdi, remover }) {
           <div className={classes.rating}>
             {/* Rating */}
             <Rating value={rating?.rate} precision={0.1} />
-            <small>{rating?.count}</small>
+            <p>
+              <small>{rating?.count}</small>
+            </p>
           </div>
           <div>
             {/* price not for everyone */}
