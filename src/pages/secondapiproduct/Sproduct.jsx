@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Sproductcard from "../../components/secondapiproduct/Sproductcard.jsx";
 import Loader from "../../components/loader/Loader.jsx";
-
 import axios from "axios";
 import classes from "../../components/secondapiproduct/spro.module.css";
 
@@ -13,17 +12,38 @@ function Sproduct() {
 
   const filteredProducts = Sproducts.filter(
     (singleproduct) =>
-      singleproduct.category.toLowerCase() === categoryName.toLowerCase()
+      singleproduct.categoryName?.toLowerCase() === categoryName?.toLowerCase()
   );
 
   useEffect(() => {
     setIsloader(true);
 
- 
+    const cleanImage = (img) => {
+      if (!img) return "https://via.placeholder.com/300";
+      // Handle case where image is a stringified array like '["https://..."]'
+      if (typeof img === "string" && img.startsWith("[")) {
+        try {
+          const parsed = JSON.parse(img);
+          return Array.isArray(parsed) ? parsed[0] : img;
+        } catch (e) {
+          return img.replace(/[\[\]"]/g, "");
+        }
+      }
+      return img;
+    };
+
     axios
-      .get("https://fakestoreapi.in/api/products?limit=150")
+      .get("https://api.escuelajs.co/api/v1/products")
       .then((res) => {
-        setProducts(res.data.products);
+        // Map the new API response to the structure expected by Sproductcard
+        const mappedProducts = res.data.map((prod) => ({
+          ...prod,
+          image: cleanImage(prod.images[0]), // Clean the image URL
+          categoryName: prod.category.name, // Extract category name for filtering
+          model: prod.category.name,
+          brand: "Platzi",
+        }));
+        setProducts(mappedProducts);
         setIsloader(false);
       })
       .catch((err) => {
@@ -35,15 +55,18 @@ function Sproduct() {
       });
   }, []);
 
-
   return (
     <>
       {isloader ? (
         <Loader />
       ) : filteredProducts.length > 0 ? (
         <section className={classes.products_container}>
-         { filteredProducts.map((singleproduct) => (
-          <Sproductcard categorized={singleproduct} key={singleproduct.id} remover={true} />
+          {filteredProducts.map((singleproduct) => (
+            <Sproductcard
+              categorized={singleproduct}
+              key={singleproduct.id}
+              remover={true}
+            />
           ))}
         </section>
       ) : (

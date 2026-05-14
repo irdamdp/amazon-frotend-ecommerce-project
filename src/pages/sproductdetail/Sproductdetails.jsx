@@ -8,7 +8,6 @@ function Sproductdetails() {
   const { ProductsId } = useParams();
   const [detail, setDetail] = useState([]);
   const [isloader, setIsloading] = useState(false);
-  console.log(ProductsId);
 
   const filteredProducts =
     Array.isArray(detail) && detail.length > 0
@@ -17,19 +16,37 @@ function Sproductdetails() {
         )
       : [];
 
-  // console.log(filteredProducts);
-
   useEffect(() => {
     setIsloading(true);
+
+    const cleanImage = (img) => {
+      if (!img) return "https://via.placeholder.com/300";
+      if (typeof img === "string" && img.startsWith("[")) {
+        try {
+          const parsed = JSON.parse(img);
+          return Array.isArray(parsed) ? parsed[0] : img;
+        } catch (e) {
+          return img.replace(/[\[\]"]/g, "");
+        }
+      }
+      return img;
+    };
+
     axios
-      .get("https://fakestoreapi.in/api/products?limit=150")
+      .get("https://api.escuelajs.co/api/v1/products")
       .then((res) => {
-        setDetail(res.data.products);
-        // console.log(res.data.products);
+        // Map the new API response to the structure expected by Sproductcard
+        const mappedProducts = res.data.map((prod) => ({
+          ...prod,
+          image: cleanImage(prod.images[0]),
+          model: prod.category.name,
+          brand: "Platzi",
+        }));
+        setDetail(mappedProducts);
         setIsloading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setIsloading(false);
       });
   }, []);
@@ -46,11 +63,11 @@ function Sproductdetails() {
             flex={true}
             key={singleproduct.id}
             remover={true}
-            alter ={false}
+            alter={false}
           />
         ))
       ) : (
-        <p>No products found for "".</p>
+        <p>No products found.</p>
       )}
     </>
   );
