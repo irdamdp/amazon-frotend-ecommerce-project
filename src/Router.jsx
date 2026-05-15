@@ -16,9 +16,7 @@ import { CheckoutProvider, Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
-const stripePromise = loadStripe(
-  "pk_test_51RE4O4RBvyWzU5kNrYSHCkCH5hokHdj5EMe9arWJ5q68PUJ0ywP6eJhoRTNFpTwMcraOPpkQbtlMVtuDILHMv0aA00Ulj5FZGA"
-);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 function Routering() {
   return (

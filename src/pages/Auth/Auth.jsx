@@ -43,7 +43,7 @@ function Auth() {
           });
           setError("");
           setLoading({ ...loading, signin: false });
-          navigate(navStateData?.state?.redirect || "/");
+          navigate(navStateData?.state?.redirect || "/", { replace: true });
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -61,7 +61,7 @@ function Auth() {
           });
           setLoading({ ...loading, signup: false });
           setError("");
-          navigate(navStateData?.state?.redirect || "/");
+          navigate(navStateData?.state?.redirect || "/", { replace: true });
         })
         .catch((error) => {
           const errorMessage = error.message;

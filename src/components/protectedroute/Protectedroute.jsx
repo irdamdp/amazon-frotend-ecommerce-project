@@ -8,7 +8,7 @@ function Protectedroute({ children, msg, redirect }) {
   useEffect(() => {
     if (!user) {
       // If user is not authenticated, redirect to the login page
-      navigate("/auth", { state: { msg, redirect } });
+      navigate("/auth", { state: { msg, redirect }, replace: true });
     }
   }, [user]);
   return children;

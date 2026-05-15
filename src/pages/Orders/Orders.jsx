@@ -41,7 +41,9 @@ function Orders() {
           <h2>Your Orders</h2>
 
           {isLoading ? (
-            <Loader />
+            <div style={{ padding: "50px 0", display: "flex", justifyContent: "center" }}>
+              <Loader />
+            </div>
           ) : orders?.length === 0 ? (
             <div style={{ padding: "20px" }}>You don't have orders yet.</div>
           ) : (
