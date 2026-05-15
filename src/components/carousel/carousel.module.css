@@ -1,19 +1,31 @@
-.hero_img::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  /* left: 0; */
-  /* width: 100%; */
-  height: 300px;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(225, 225, 225, 0),
-    rgba(225, 225, 225)
-  );
+.carousel_container {
+  position: relative;
   z-index: 1;
 }
-@media (max-width: 420px) {
-  .carousel_container img {
-    height: 200px !important;
+
+.carousel_container img {
+  width: 100%;
+  min-height: 250px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
+}
+
+.hero_img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(to bottom, transparent, var(--background-color));
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+
+@media (max-width: 780px) {
+  .hero_img {
+    height: 150px;
   }
+
 }

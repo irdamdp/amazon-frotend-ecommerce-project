@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./spro.module.css";
 import Currencyformat from "../currencyformat/Currencyformat";
 import { Link } from "react-router-dom";
@@ -8,7 +8,8 @@ import { DataContext } from "../Dataprovider/Dataprovider";
 import { Type } from "../../Utility/actiontype";
 
 function Sproductcard({ categorized, flex, renderdi, remover, alter }) {
-  const { image, title, id, price, model, brand, description } = categorized;
+  const { images, title, id, price, model, brand, description } = categorized;
+  const [imageIndex, setImageIndex] = useState(0);
 
   const [state, dispatch] = useContext(DataContext);
   const nothing = () => {
@@ -20,7 +21,7 @@ function Sproductcard({ categorized, flex, renderdi, remover, alter }) {
       type: Type.ADD_TO_BASKET,
       alterer: false,
       item: {
-        image,
+        image: images ? images[imageIndex] : categorized.image,
         title,
         id,
         model,
@@ -29,6 +30,19 @@ function Sproductcard({ categorized, flex, renderdi, remover, alter }) {
       },
     });
   };
+
+  const handleImageError = (e) => {
+    if (images && imageIndex < images.length - 1) {
+      // Try the next image in the array
+      setImageIndex(imageIndex + 1);
+    } else {
+      // Final fallback if all images in array fail
+      e.target.src = "https://via.placeholder.com/250x300?text=Image+Not+Available";
+    }
+  };
+
+  const currentImage = images ? images[imageIndex] : categorized.image;
+
   return (
     <>
       <div
@@ -37,7 +51,11 @@ function Sproductcard({ categorized, flex, renderdi, remover, alter }) {
         }`}
       >
         <Link to={`/product/${id}`}>
-          <img src={image} alt="" />
+          <img
+            src={currentImage}
+            alt={title}
+            onError={handleImageError}
+          />
         </Link>
         <div className={classes.card_info}>
           <h3>{title}</h3>

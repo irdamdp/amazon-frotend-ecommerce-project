@@ -8,6 +8,7 @@ import Currencyformat from "../../components/currencyformat/Currencyformat";
 import { Type } from "../../Utility/actiontype";
 import { FaAngleUp } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
+import BackButton from "../../components/BackButton/BackButton";
 function Cart() {
   const [{ basket }, dispatch] = useContext(DataContext);
 
@@ -37,6 +38,7 @@ function Cart() {
     <>
       <section className={basket?.length !== 0 && classes.container}>
         <div className={classes.cart_container}>
+          <BackButton />
           <h2>Hello!</h2>
           <h3>Your shopping basket</h3>
           <hr />
@@ -45,7 +47,7 @@ function Cart() {
           ) : (
             basket?.map((item, i) => {
               return (
-                <div className={classes.containimg}>
+                <div key={i} className={classes.containimg}>
                   {item.alterer ? (
                     <Products_card
                       key={i}

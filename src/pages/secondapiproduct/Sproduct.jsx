@@ -4,6 +4,7 @@ import Sproductcard from "../../components/secondapiproduct/Sproductcard.jsx";
 import Loader from "../../components/loader/Loader.jsx";
 import axios from "axios";
 import classes from "../../components/secondapiproduct/spro.module.css";
+import BackButton from "../../components/BackButton/BackButton";
 
 function Sproduct() {
   const [Sproducts, setProducts] = useState([]);
@@ -38,8 +39,8 @@ function Sproduct() {
         // Map the new API response to the structure expected by Sproductcard
         const mappedProducts = res.data.map((prod) => ({
           ...prod,
-          image: cleanImage(prod.images[0]), // Clean the image URL
-          categoryName: prod.category.name, // Extract category name for filtering
+          images: prod.images.map(img => cleanImage(img)),
+          categoryName: prod.category.name,
           model: prod.category.name,
           brand: "Platzi",
         }));
@@ -60,14 +61,17 @@ function Sproduct() {
       {isloader ? (
         <Loader />
       ) : filteredProducts.length > 0 ? (
-        <section className={classes.products_container}>
-          {filteredProducts.map((singleproduct) => (
-            <Sproductcard
-              categorized={singleproduct}
-              key={singleproduct.id}
-              remover={true}
-            />
-          ))}
+        <section style={{ padding: "10px 20px" }}>
+          <BackButton />
+          <div className={classes.products_container}>
+            {filteredProducts.map((singleproduct) => (
+              <Sproductcard
+                categorized={singleproduct}
+                key={singleproduct.id}
+                remover={true}
+              />
+            ))}
+          </div>
         </section>
       ) : (
         <p>No products found for "{categoryName}".</p>

@@ -10,6 +10,7 @@ import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase";
 import { useNavigate } from "react-router-dom";
 import { Type } from "../../Utility/actiontype";
+import BackButton from "../../components/BackButton/BackButton";
 
 function Payment() {
   const [processing, setprocessing] = useState(false);
@@ -58,7 +59,7 @@ function Payment() {
 
       const response = await axiosinstance({
         method: "POST",
-        url: `/payment/create?total=${total * 100}`, // Convert to cents
+        url: `/payment/create?total=${Math.round(total * 100)}`, // Convert to cents and round to avoid floating point issues
       });
 
       // console.log("Payment Intent Response:", response.data);
@@ -104,7 +105,8 @@ function Payment() {
   // Render the payment component
   return (
     <>
-      <div>
+      <div  className={classes.payment_containerheader}>
+        <BackButton />
         {/* header */}
         <div className={classes.payment_header}>
           Checkout({totalamount})items

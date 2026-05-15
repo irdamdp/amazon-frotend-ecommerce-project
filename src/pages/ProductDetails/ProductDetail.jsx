@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../components/loader/Loader";
 import Products_card from "../../components/products/Products_card";
+import BackButton from "../../components/BackButton/BackButton";
 
 function ProductDetail() {
   const { ProductsId } = useParams();
@@ -30,12 +31,15 @@ function ProductDetail() {
       {isloading ? (
         <Loader />
       ) : detail && Object.keys(detail).length > 0 ? (
-        <Products_card
-          product={detail}
-          flex={true}
-          renderdi={true}
-          remover={true}
-        />
+        <div style={{ padding: "20px" }}>
+          <BackButton />
+          <Products_card
+            product={detail}
+            flex={true}
+            renderdi={true}
+            remover={true}
+          />
+        </div>
       ) : (
         ""
       )}

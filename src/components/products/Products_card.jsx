@@ -37,7 +37,13 @@ function Products_card({ product, flex, renderdi, remover }) {
         }`}
       >
         <Link to={`/products/${id}`}>
-          <img src={image} alt="" />
+          <img
+            src={image}
+            alt=""
+            onError={(e) => {
+              e.target.src = "https://via.placeholder.com/250x300?text=Image+Not+Available";
+            }}
+          />
         </Link>
 
         <div className={classes.card_info}>
@@ -51,14 +57,13 @@ function Products_card({ product, flex, renderdi, remover }) {
               <small>{rating?.count}</small>
             </p>
           </div>
-          <div>
-            {/* price not for everyone */}
+          <div className={classes.price}>
             <Currencyformat amount={price} />
           </div>
 
           <button
-            className={`${classes.button} ${remover ? "" : classes.hidden}`}
-            onClick={remover ? addtocart : ""}
+            className={classes.button}
+            onClick={remover ? addtocart : undefined}
           >
             {remover ? (
               "Add to cart"

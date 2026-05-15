@@ -12,7 +12,7 @@ function Scategorycard({ data }) {
             <h2>{data?.title}</h2>
           </span>
           <img src={data?.imgLink} alt="" />
-          <p>shop now</p>
+          <p>Shop now</p>
         </Link>
       </div>
     </>

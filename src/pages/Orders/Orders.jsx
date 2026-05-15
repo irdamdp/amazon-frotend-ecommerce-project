@@ -4,6 +4,7 @@ import classes from "./orders.module.css";
 import { DataContext } from "../../components/Dataprovider/Dataprovider";
 import Products_card from "../../components/products/Products_card";
 import Sproductcard from "../../components/secondapiproduct/Sproductcard";
+import BackButton from "../../components/BackButton/BackButton";
 function Orders() {
   const [orders, setOrders] = useState([]);
   const [{ user }, dispatch] = useContext(DataContext);
@@ -34,6 +35,7 @@ function Orders() {
     <>
       <section className={classes.container}>
         <div className={classes.orders_container}>
+          <BackButton />
           <h2>Your Orders</h2>
           {/* ordered items will be displayed here  */}
           {orders?.length == 0 && (
@@ -47,7 +49,7 @@ function Orders() {
                   <p> Order ID: {order?.id} </p>
                   {order?.data?.basket?.map((item, i) => {
                     return (
-                      <div>
+                      <div key={i}>
                         {item.alterer ? (
                           <Products_card
                             key={i}

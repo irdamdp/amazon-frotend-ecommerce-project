@@ -4,6 +4,7 @@ import Products_card from "../../components/products/Products_card";
 import classes from "./results.module.css";
 import Loader from "../../components/loader/Loader";
 import axios from "axios";
+import BackButton from "../../components/BackButton/BackButton";
 function Results() {
   const [results, setResults] = useState([]);
   const [isloader, setIsloader] = useState(false);
@@ -27,9 +28,10 @@ function Results() {
 
   return (
     <>
-      <section>
-        <h1 style={{ padding: "30px" }}>Results</h1>
-        <p style={{ padding: "30px" }}>Category / {categoryName} </p>
+      <section style={{ padding: "10px 30px" }}>
+        <BackButton />
+        <h1>Results</h1>
+        <p>Category / {categoryName} </p>
 
         {isloader ? (
           <Loader />

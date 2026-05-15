@@ -1,3 +1,6 @@
+.payment_containerheader{
+  padding: 10px 20px;
+}
 .payment_header {
   font-size: 24px;
   text-align: center;
@@ -75,9 +78,11 @@
   color: rgb(52, 52, 52);
 }
 
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 775px) {
   .payment_flex {
     flex-direction: column;
+padding: 10px 0px;
   }
   .payment_flex h3 {
     text-align: center;
@@ -88,4 +93,20 @@
   .payment_container {
     width: 100%;
   }
+
 }
+
+@media screen and (max-width: 450px) {
+   .payment_flex {
+    flex-direction: column;
+    padding: 0px;
+    gap: 0px;
+  }
+   .payment_containerheader{
+  padding: 10px 0px;
+}
+.payment_container {
+  padding: 0px 20px;
+}
+}
+

@@ -33,6 +33,8 @@ function Products() {
         <Loader />
       ) : (
         <section className={classes.products_container}>
+          <h2 className={classes.section_title}>Recommended for you</h2>
+          <div className={classes.products_grid}>
           {products.map((singleproduct) => (
             <Products_card
               product={singleproduct}
@@ -42,6 +44,7 @@ function Products() {
               remover={true}
             />
           ))}
+          </div>
         </section>
       )}
     </>

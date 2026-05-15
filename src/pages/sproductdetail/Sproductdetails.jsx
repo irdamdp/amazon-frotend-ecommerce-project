@@ -3,6 +3,7 @@ import Sproductcard from "../../components/secondapiproduct/Sproductcard";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../components/loader/Loader";
+import BackButton from "../../components/BackButton/BackButton";
 
 function Sproductdetails() {
   const { ProductsId } = useParams();
@@ -38,7 +39,7 @@ function Sproductdetails() {
         // Map the new API response to the structure expected by Sproductcard
         const mappedProducts = res.data.map((prod) => ({
           ...prod,
-          image: cleanImage(prod.images[0]),
+          images: prod.images.map(img => cleanImage(img)),
           model: prod.category.name,
           brand: "Platzi",
         }));
@@ -56,16 +57,19 @@ function Sproductdetails() {
       {isloader ? (
         <Loader />
       ) : filteredProducts.length > 0 ? (
-        filteredProducts.map((singleproduct) => (
-          <Sproductcard
-            categorized={singleproduct}
-            renderdi={true}
-            flex={true}
-            key={singleproduct.id}
-            remover={true}
-            alter={false}
-          />
-        ))
+        <div style={{ padding: "20px" }}>
+          <BackButton />
+          {filteredProducts.map((singleproduct) => (
+            <Sproductcard
+              categorized={singleproduct}
+              renderdi={true}
+              flex={true}
+              key={singleproduct.id}
+              remover={true}
+              alter={false}
+            />
+          ))}
+        </div>
       ) : (
         <p>No products found.</p>
       )}
