@@ -14,6 +14,8 @@ import Authforget from "./pages/Auth/Authforget.jsx";
 import Sproductdetails from "./pages/sproductdetail/Sproductdetails";
 import { CheckoutProvider, Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+
 const stripePromise = loadStripe(
   "pk_test_51RE4O4RBvyWzU5kNrYSHCkCH5hokHdj5EMe9arWJ5q68PUJ0ywP6eJhoRTNFpTwMcraOPpkQbtlMVtuDILHMv0aA00Ulj5FZGA"
 );
@@ -22,6 +24,7 @@ function Routering() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="auth" element={<Authh />} />
           <Route path="/forgot-password" element={<Authforget />} />

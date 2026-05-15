@@ -23,7 +23,7 @@ body {
   width: 100%;
   background-color: var(--background-color);
   color: var(--text-color);
-  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -41,3 +41,25 @@ button {
   border: none;
   outline: none;
 }
+
+
+ @media (min-width:650px) { 
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cecece;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7c7c7c;
+}
+}
+ 

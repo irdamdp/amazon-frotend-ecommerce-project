@@ -80,3 +80,16 @@
     height: 230px;
   }
 }
+
+@media (max-width: 550px) {
+    .category_container {
+    margin-top: -50px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 7px;
+    padding: 0 10px;
+  }
+  .category_card img {
+  object-fit: cover;
+}
+
+}

@@ -7,7 +7,7 @@ export const categoryInfo = [
       "https://images.unsplash.com/photo-1666332100970-1fd5c53c6497?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg2fHxlbGVjdHJvbmljcyUyMGNhbWVyYXxlbnwwfDF8MHx8fDA%3D",
   },
   {
-    title: "Discover fashion trends",
+    title: "fashion trends",
     name: "women's clothing",
     boolean: "true",
     imgLink:
