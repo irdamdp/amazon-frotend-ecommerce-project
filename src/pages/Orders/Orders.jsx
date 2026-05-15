@@ -5,8 +5,11 @@ import { DataContext } from "../../components/Dataprovider/Dataprovider";
 import Products_card from "../../components/products/Products_card";
 import Sproductcard from "../../components/secondapiproduct/Sproductcard";
 import BackButton from "../../components/BackButton/BackButton";
+import Loader from "../../components/loader/Loader";
+
 function Orders() {
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [{ user }, dispatch] = useContext(DataContext);
 
   useEffect(() => {
@@ -16,18 +19,17 @@ function Orders() {
         .collection("orders")
         .orderBy("created", "desc")
         .onSnapshot((snapshot) => {
-          console.log("Orders fetched:", snapshot.docs);
           setOrders(
             snapshot.docs.map((doc) => ({
               id: doc.id,
               data: doc.data(),
             }))
           );
+          setIsLoading(false);
         });
-      // console.log("Orders state updated:", orders);
     } else {
-      // If user is not logged in, redirect to login or show a message}
       setOrders([]);
+      setIsLoading(false);
     }
   }, []);
 
@@ -37,42 +39,45 @@ function Orders() {
         <div className={classes.orders_container}>
           <BackButton />
           <h2>Your Orders</h2>
-          {/* ordered items will be displayed here  */}
-          {orders?.length == 0 && (
+
+          {isLoading ? (
+            <Loader />
+          ) : orders?.length === 0 ? (
             <div style={{ padding: "20px" }}>You don't have orders yet.</div>
+          ) : (
+            <div>
+              {orders?.map((order) => {
+                return (
+                  <div key={order.id}>
+                    <hr />
+                    <p> Order ID: {order?.id} </p>
+                    {order?.data?.basket?.map((item, i) => {
+                      return (
+                        <div key={i}>
+                          {item.alterer ? (
+                            <Products_card
+                              key={i}
+                              product={item}
+                              renderdi={false}
+                              flex={true}
+                              remover={false}
+                            />
+                          ) : (
+                            <Sproductcard
+                              categorized={item}
+                              renderdi={false}
+                              flex={true}
+                              remover={false}
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
           )}
-          <div>
-            {orders?.map((order) => {
-              return (
-                <div key={order.id}>
-                  <hr />
-                  <p> Order ID: {order?.id} </p>
-                  {order?.data?.basket?.map((item, i) => {
-                    return (
-                      <div key={i}>
-                        {item.alterer ? (
-                          <Products_card
-                            key={i}
-                            product={item}
-                            renderdi={false}
-                            flex={true}
-                            remover={false}
-                          />
-                        ) : (
-                          <Sproductcard
-                            categorized={item}
-                            renderdi={false}
-                            flex={true}
-                            remover={false}
-                          />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
     </>
